@@ -1,12 +1,12 @@
-import React from "react";
+import { React, useState } from "react";
 import imagepng from "../../assets/image.png";
 import "./uploadBox.css";
 
 const UploadBox = ({ props, event }) => {
+  const previewArea = document.querySelector(".container-drag");
   const fileDrop = (ev) => {
     let file = ev.dataTransfer.files[0];
     ev.preventDefault();
-    const previewArea = document.querySelector(".container-drag");
     const fileType = file.type;
     const validExtensions = ["image/png", "image/jpeg"];
     if (validExtensions.includes(fileType)) {
@@ -22,13 +22,15 @@ const UploadBox = ({ props, event }) => {
     }
   };
 
+  const [draggedOver, setDraggedOver] = useState(false);
   const handleDragOver = (ev) => {
-    console.log("Files in drop zone");
-
     ev.preventDefault();
+    setDraggedOver(true);
   };
+  const [draggedOut, setDraggedOut] = useState(false);
   const dragLeave = (ev) => {
     ev.preventDefault();
+    setDraggedOut(true);
   };
 
   const dragEnter = (ev) => {
@@ -40,13 +42,15 @@ const UploadBox = ({ props, event }) => {
       <span className="subtitle">File should be Jpeg,Png,Jpg</span>
       <div>
         <div
-          className="container-drag"
+          className={`container-drag ${draggedOver ? "active" : ""} ${
+            draggedOut ? "" : ""
+          } `}
           onDrop={(event) => fileDrop(event)}
           onDragOver={(event) => handleDragOver(event)}
           onDragEnter={(event) => dragEnter(event)}
           onDragLeave={(event) => dragLeave(event)}
         >
-          <img className="svg" src={imagepng} alt="preview" />
+          <img className="blankimage" src={imagepng} alt="preview" />
           <div className="container-text">Drag & Drop your image here</div>
         </div>
         <form>
