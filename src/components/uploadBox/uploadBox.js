@@ -1,33 +1,25 @@
 import React from "react";
-
+import imagepng from "../../assets/image.png";
 import "./uploadBox.css";
 
-const UploadBox = (props) => {
-  //   const handleDrop = (ev) => {
-  //     console.log("File dropped");
-
-  //     ev.preventDefault();
-  //     if (ev.dataTransfer.items) {
-  //       for (var i = 0; i < ev.dataTransfer.items.length; i++) {
-  //         if (ev.dataTransfer.items[i].kind === "file") {
-  //           var file = ev.dataTransfer.items[i].getAsFile();
-  //           console.log("... file[" + i + "].name = " + file.name);
-  //           // TODO : SHOW UPLOADED PICTURE
-  //         }
-  //       }
-  //     } else {
-  //       // Use DataTransfer interface to access the file(s)
-  //       for (var j = 0; j < ev.dataTransfer.files.length; j++) {
-  //         console.log(
-  //           "... file[" + j + "].name = " + ev.dataTransfer.files[j].name
-  //         );
-  //       }
-  //     }
-  //   };
-
+const UploadBox = ({ props, event }) => {
   const fileDrop = (ev) => {
+    let file = ev.dataTransfer.files[0];
     ev.preventDefault();
-    console.log(ev.dataTransfer.files);
+    const previewArea = document.querySelector(".container-drag");
+    const fileType = file.type;
+    const validExtensions = ["image/png", "image/jpeg"];
+    if (validExtensions.includes(fileType)) {
+      let fileReader = new FileReader();
+      fileReader.onload = () => {
+        let fileURL = fileReader.result;
+        let imgTag = `<img src="${fileURL}" alt="preview">`;
+        previewArea.innerHTML = imgTag;
+      };
+      fileReader.readAsDataURL(file);
+    } else {
+      alert("This is not an image File!");
+    }
   };
 
   const handleDragOver = (ev) => {
@@ -42,18 +34,26 @@ const UploadBox = (props) => {
   const dragEnter = (ev) => {
     ev.preventDefault();
   };
-
   return (
-    <div
-      className="container-drag"
-      onDrop={(event) => fileDrop(event)}
-      onDragOver={(event) => handleDragOver(event)}
-      onDragEnter={(event) => dragEnter(event)}
-      onDragLeave={(event) => dragLeave(event)}
-    >
-      {/* <div className="container-text">
-        Drag one or more photos into this zone.
-      </div> */}
+    <div className="container">
+      <span className="title">Upload your image</span>
+      <span className="subtitle">File should be Jpeg,Png,Jpg</span>
+      <div>
+        <div
+          className="container-drag"
+          onDrop={(event) => fileDrop(event)}
+          onDragOver={(event) => handleDragOver(event)}
+          onDragEnter={(event) => dragEnter(event)}
+          onDragLeave={(event) => dragLeave(event)}
+        >
+          <img className="svg" src={imagepng} alt="preview" />
+          <div className="container-text">Drag & Drop your image here</div>
+        </div>
+        <form>
+          <input type="file" id="myFile" name="filename" />
+          <button type="file submit" />
+        </form>
+      </div>
     </div>
   );
 };
