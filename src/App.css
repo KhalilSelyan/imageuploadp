@@ -8,10 +8,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: ##fafafb;
+  background: #fafafb;
 }
 
-#upload-box {
+.upload-box {
   width: 402px;
   height: 469px;
   background: #ffffff;
@@ -22,6 +22,10 @@ body {
   font-weight: 500;
   letter-spacing: -0.035em;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 #upload-container {
@@ -44,6 +48,19 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+
+#uploaded-img {
+  position: inherit;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.solid {
+  border-radius: 12px;
+  border: 1px solid #97bef4 !important;
 }
 
 #dragtext {
@@ -101,4 +118,97 @@ input {
   letter-spacing: 0.03em;
   border: none;
   cursor: pointer;
+}
+
+#clear {
+  background: red;
+  margin-right: 2rem;
+}
+
+#loading-bar {
+  width: 400.36px;
+  height: 143.57px;
+  background: #ffffff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.progress2 {
+  padding: 6px;
+  margin: 20px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25),
+    0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar2 {
+  height: 18px;
+  border-radius: 30px;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
+  transition: 0.4s linear;
+  transition-property: width, background-color;
+}
+
+.progress-moved .progress-bar2 {
+  width: 100%;
+  background-color: #2f80ed;
+  animation: progressAnimation 3s;
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 5%;
+    background-color: #2f81edc0;
+  }
+  100% {
+    width: 100%;
+    background-color: #2f80ed;
+  }
+}
+
+#check {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+}
+
+#submitted-img {
+  margin-top: 10px;
+  width: 338px;
+  height: 224.4px;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+#link-url {
+  width: 338px;
+  height: 34px;
+  background: #f6f8fb;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+#linktext {
+  width: 240px;
+  height: 12px;
+  font-size: 8px;
+  line-height: 12px;
+  text-align: center;
+  color: #4f4f4f;
 }
