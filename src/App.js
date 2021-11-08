@@ -48,7 +48,7 @@ function App() {
   const submitImage = async () => {
     setIsLoading(true);
     let body = new FormData();
-    body.set("key", "a5b3d2cc30581a071bc976f930fd034e");
+    body.set("key", process.env.REACT_APP_IMGBB);
     body.append("image", file);
     const res = await axios({
       method: "post",
